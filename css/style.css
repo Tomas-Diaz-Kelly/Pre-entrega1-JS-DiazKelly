@@ -1,0 +1,47 @@
+.body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.cuerpoPrincipal {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas: 
+    "header header header header header header"
+    "main main main main main main"
+    "main main main main main main"
+    "main main main main main main"
+    "footer footer footer footer footer footer"
+    ;
+}
+
+
+header{
+    grid-area: header;
+    background-color: aqua;
+}
+
+header h1{
+    color: red;
+
+}
+
+main{
+    grid-area: main;
+    background-color: blue;
+}
+main div p{
+    color: burlywood;
+}
+
+footer{
+    grid-area: footer;
+    background-color: bisque;
+}
+
+footer div p {
+    color: yellowgreen;
+}
