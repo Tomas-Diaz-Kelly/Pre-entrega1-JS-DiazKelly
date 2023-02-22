@@ -27,7 +27,7 @@ function seleccionDeProductos(){
         }
         alert('El total de la compra es de:' + sumaDeProductos)
         
-        let seguircomprando = prompt('Quiere continuar con la compra ? 1:si 2:no')
+        let seguircomprando = parseInt(prompt('Quiere seguir realizando la compra? 1:Si 2:no'))
         if (seguircomprando !== 1 ){
             continuarCompra = false;
         }else{
