@@ -21,7 +21,7 @@
 
 header{
     grid-area: header;
-    background-color: aqua;
+    background-color: rgb(0, 255, 106);
 }
 
 header h1{
@@ -31,15 +31,17 @@ header h1{
 
 main{
     grid-area: main;
-    background-color: blue;
+    background-color: rgb(241, 213, 152);
 }
 main div p{
-    color: burlywood;
+    color: rgb(10, 7, 160);
 }
-
+main div ul li{
+    list-style: none;
+}
 footer{
     grid-area: footer;
-    background-color: bisque;
+    background-color: rgb(252, 249, 247);
 }
 
 footer div p {
