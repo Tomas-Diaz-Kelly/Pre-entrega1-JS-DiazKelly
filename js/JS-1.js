@@ -168,10 +168,10 @@ function listaDeProductos (){
 function agregarAlCarrito(e){
     let id = Number(e.target.getAttribute('id'))
     let agregoProductoAlCarrito = productos.find((producto)=>producto.id === id)
+    let nuevaVariable =document.createElement('div') 
     
     
-    agregoProductoAlCarrito = document.createElement('div')
-    agregoProductoAlCarrito.innerHTML =(
+    nuevaVariable.innerHTML =(
         `
         <h3> ${agregoProductoAlCarrito.nombre} </h3>
         <h3> ${agregoProductoAlCarrito.precio} </h3>
@@ -182,7 +182,7 @@ function agregarAlCarrito(e){
         )
 
         let muestroCarrito = document.getElementById("carrito")
-        muestroCarrito.append(agregoProductoAlCarrito)
+        muestroCarrito.append(nuevaVariable)
         console.log(muestroCarrito)
 }
 
