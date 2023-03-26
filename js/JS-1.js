@@ -139,6 +139,7 @@ const productos = [
     {id:4,nombre:'Bombones',precio:350},
 ]
 const carrito = []
+console.log(carrito)
 
 // const clickBoton = document.getElementById('boton')
 //     clickBoton.addEventListener('click',respuestaClick)
@@ -161,6 +162,7 @@ function listaDeProductos (){
             lista.append(boxProductos);
             let botonAgregar = document.getElementById(`${producto.id}`)
             botonAgregar.addEventListener('click',agregarAlCarrito)
+            
         }
 
 }
@@ -168,9 +170,12 @@ function listaDeProductos (){
 function agregarAlCarrito(e){
     let id = Number(e.target.getAttribute('id'))
     let agregoProductoAlCarrito = productos.find((producto)=>producto.id === id)
-    let nuevaVariable =document.createElement('div') 
     
-    
+    agregoProductoAlCarrito.push(carrito)
+
+
+
+    let nuevaVariable = document.createElement('div') 
     nuevaVariable.innerHTML =(
         `
         <h3> ${agregoProductoAlCarrito.nombre} </h3>
@@ -183,7 +188,7 @@ function agregarAlCarrito(e){
 
         let muestroCarrito = document.getElementById("carrito")
         muestroCarrito.append(nuevaVariable)
-        console.log(muestroCarrito)
+        // console.log(muestroCarrito)
 }
 
 
