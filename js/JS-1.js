@@ -42,7 +42,7 @@ function agregarAlCarrito(e){
   
     if (productoEnCarrito) {
       productoEnCarrito.cantidad += 1;
-      document.getElementById(`producto${productoEnCarrito.id}`).querySelector('h3:last-of-type').textContent = `Cantidad: ${productoEnCarrito.cantidad}`;
+      document.getElementById(`producto${productoEnCarrito.id}`)
     } else {
       let productoConCantidad = {...producto, cantidad: 1};
       carrito.push(productoConCantidad);
@@ -59,6 +59,8 @@ function agregarAlCarrito(e){
     }
   
     localStorage.setItem("carrito", JSON.stringify(carrito));
+    renderizarCarrito() 
+    calcularTotal();
 }
 
 
@@ -92,5 +94,5 @@ const calcularTotal = () => {
 
 listaDeProductos ()
 
-renderizarCarrito()
-calcularTotal();
+// renderizarCarrito()
+// calcularTotal();
