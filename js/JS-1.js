@@ -8,7 +8,21 @@ const productos = [
     {id:4,nombre:'Bombones',precio:350},
 ]
 
-const carrito = JSON.parse(localStorage.getItem('carrito')) || []
+
+let carritoLocal = JSON.parse(localStorage.getItem('carrito'))
+let carrito = []
+function iniciarPrograma(){
+    if (carritoLocal){
+        carrito = carritoLocal
+        console.log(carrito)
+        renderizarCarrito()
+    }
+    listaDeProductos ()
+    
+}
+
+
+
 const contenedorCarrito = document.getElementById("carrito")
 const contenedorTotal = document.getElementById("total");
 
@@ -19,9 +33,15 @@ function listaDeProductos (){
         let boxProductos = document.createElement("div")
         boxProductos.innerHTML = (
             `
-            <h3>${producto.nombre}</h3>
-            <h3>$ ${producto.precio}</h3>
-            <button id=${producto.id} class="btn"> + </button>
+            
+            <div class="card bg-secondary">
+                <div class="card-body">
+                    <h3>${producto.nombre}</h3>
+                    <h3>$ ${producto.precio}</h3>
+                    <button id=${producto.id} class="btn btn-light">+</button>
+                </div>
+            </div>
+            
             `
             )
 
@@ -63,21 +83,27 @@ function agregarAlCarrito(e){
     calcularTotal();
 }
 
-
-
-
 const renderizarCarrito = () => {
     contenedorCarrito.innerHTML = "";
     carrito.forEach((producto) => {
         const nuevaVariable = document.createElement("div");
         nuevaVariable.innerHTML = `
-        <h3>${producto.nombre}</h3>
-        <h3>$ ${producto.precio}</h3>
-        <h3>Cantidad: ${producto.cantidad}</h3>
-        <h3>Total: $ ${producto.precio * producto.cantidad}</h3>
+        <div class='card mi-card'>
+            <h3 class="card-title">${producto.nombre}</h3>
+            <h3 class="card-price">$ ${producto.precio}</h3>
+            <h3 class="card-quantity">Cantidad: ${producto.cantidad}</h3>
+            <h3 class="card-total">Total: $ ${producto.precio * producto.cantidad}</h3>
+            <button id="eliminar${producto.id}" class="btn btn-danger">Eliminar</button>
+        </div>
+
         `;
         nuevaVariable.setAttribute("id", `producto${producto.id}`);
         contenedorCarrito.append(nuevaVariable);
+
+        const botonEliminar = document.getElementById(`eliminar${producto.id}`)
+        botonEliminar.addEventListener('click', eliminarDelCarrito)
+
+        
     });
     
 };
@@ -92,7 +118,26 @@ const calcularTotal = () => {
 };
 
 
-listaDeProductos ()
 
-// renderizarCarrito()
-// calcularTotal();
+
+function eliminarDelCarrito(e){
+    const id = Number(e.target.getAttribute('id').replace('eliminar', ''));
+    const productoIndex = carrito.findIndex((producto) => producto.id === id);
+    carrito.splice(productoIndex, 1);
+    const elementoProducto = document.getElementById(`producto${id}`);
+    elementoProducto.parentNode.removeChild(elementoProducto);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    calcularTotal();
+}
+
+
+
+
+
+
+
+
+
+
+iniciarPrograma()
+
