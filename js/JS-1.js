@@ -1,6 +1,18 @@
-// Tercer entrega
+// Proyecto final 
 
+let form = document.getElementById('form')
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    let nombre = e.target[0].value
+    let apellido = e.target[1].value
+    let modal = document.createElement('div')
+    modal.innerHTML = `Bienvenido: ${nombre} ${apellido}`
+    document.body.appendChild(modal)
+    setTimeout(() => {
+        document.body.removeChild(modal)
+    }, 3000)
 
+})
 const productos = [
     {id:1,nombre:'Difusores',precio:600},
     {id:2,nombre:'Velas',precio:800},
@@ -18,7 +30,7 @@ function iniciarPrograma(){
         renderizarCarrito()
     }
     listaDeProductos ()
-    
+    cajaTotal()
 }
 
 
@@ -81,6 +93,15 @@ function agregarAlCarrito(e){
     localStorage.setItem("carrito", JSON.stringify(carrito));
     renderizarCarrito() 
     calcularTotal();
+    
+
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Producto agregado correctamente',
+        showConfirmButton: false,
+        timer: 800
+      })
 }
 
 const renderizarCarrito = () => {
@@ -115,9 +136,8 @@ const calcularTotal = () => {
     let contenedorTotal = document.createElement('div') 
     contenedorTotal.innerHTML = `Total: $ ${total}`;
     
+    cajaTotal()
 };
-
-
 
 
 function eliminarDelCarrito(e){
@@ -128,15 +148,29 @@ function eliminarDelCarrito(e){
     elementoProducto.parentNode.removeChild(elementoProducto);
     localStorage.setItem('carrito', JSON.stringify(carrito));
     calcularTotal();
+
+    Swal.fire({
+        position: 'top-end',
+        icon: 'warning',
+        title: 'Producto eliminado correctamente',
+        showConfirmButton: false,
+        timer: 800
+      })
 }
 
 
-
-
-
-
-
-
+const cajaTotal = () => {
+    let boxTotal = document.createElement('div');
+    let total = 0;
+  
+    for (const cantidad of carrito) {
+      total += cantidad.precio * cantidad.cantidad;
+    }
+  
+    boxTotal.innerHTML = `<h3>El precio total es: ${total}</h3>`;
+    let precioTotal = document.getElementById('boxCajaTotal');
+    precioTotal.appendChild(boxTotal);
+  };
 
 
 iniciarPrograma()
