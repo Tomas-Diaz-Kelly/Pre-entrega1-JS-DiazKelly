@@ -30,14 +30,11 @@ function iniciarPrograma(){
         renderizarCarrito()
     }
     listaDeProductos ()
-    cajaTotal()
+    
 }
-
-
 
 const contenedorCarrito = document.getElementById("carrito")
 const contenedorTotal = document.getElementById("total");
-
 
 function listaDeProductos (){
     for( const producto of productos){
@@ -158,20 +155,46 @@ function eliminarDelCarrito(e){
       })
 }
 
-
 const cajaTotal = () => {
-    let boxTotal = document.createElement('div');
-    let total = 0;
+    let cajaPrecioTotal = document.getElementById("boxCajaTotal");
+    let boxTotal = document.createElement("div");
+    cajaPrecioTotal.innerHTML = "";
   
-    for (const cantidad of carrito) {
-      total += cantidad.precio * cantidad.cantidad;
-    }
+    const precioTotal = carrito.reduce(
+      (acc, el) => (acc += el.precio * el.cantidad),
+      0
+    );
   
-    boxTotal.innerHTML = `<h3>El precio total es: ${total}</h3>`;
-    let precioTotal = document.getElementById('boxCajaTotal');
-    precioTotal.appendChild(boxTotal);
-  };
+    boxTotal.innerHTML = `<h3>El precio total es: ${precioTotal}</h3>`;
+  
+    cajaPrecioTotal.appendChild(boxTotal);
+};
 
 
+
+const cambioValorADolar = () => {
+    let botonCambiarDolar = document.createElement('div')
+    botonCambiarDolar.innerHTML = `
+      <button id="pasarValor">Cambiar valor a dolar</button>
+    `
+    let btnCD = document.getElementById('botonCambioADolar')
+    btnCD.appendChild(botonCambiarDolar)
+  
+    let cambio = document.getElementById('pasarValor')
+    cambio.addEventListener('click', cambioDolar)
+  }
+
+// function cambioDolar(){
+//     fetch("https://openexchangerates.org/api/latest.json")
+
+//     .then((Response) => Response.json())
+//     .then((data) => {console.log(data)})
+//         data.forEach
+//     .catch((error) => {console.log(error)})
+
+
+// } 
+// console.log(cambioDolar())
+// cambioDolar()
 iniciarPrograma()
 
