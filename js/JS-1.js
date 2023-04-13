@@ -134,6 +134,7 @@ const calcularTotal = () => {
     contenedorTotal.innerHTML = `Total: $ ${total}`;
     
     cajaTotal()
+    cambioValorADolar()
 };
 
 
@@ -181,20 +182,30 @@ const cambioValorADolar = () => {
     btnCD.appendChild(botonCambiarDolar)
   
     let cambio = document.getElementById('pasarValor')
-    cambio.addEventListener('click', cambioDolar)
+    cambio.addEventListener('click', cambioDeMoneda)
   }
 
-// function cambioDolar(){
-//     fetch("https://openexchangerates.org/api/latest.json")
+function cambioDeMoneda(){
 
-//     .then((Response) => Response.json())
-//     .then((data) => {console.log(data)})
-//         data.forEach
-//     .catch((error) => {console.log(error)})
+    const myHeaders = new Headers();
+    myHeaders.append("apikey", "4d5Oi2ahBjXZnJF7R6gSVSrayAGWel82");
+    
+    const requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+      headers: myHeaders
+    };
+  
+    fetch("https://api.apilayer.com/exchangerates_data/convert?to={ARS}&from={USD}&amount={12/04/2023}")
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+}  
 
 
-// } 
-// console.log(cambioDolar())
-// cambioDolar()
+
+
+
 iniciarPrograma()
 
