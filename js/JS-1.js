@@ -177,27 +177,18 @@ const cambioValorADolar = () => {
     let botonCambiarDolar = document.createElement('div')
     botonCambiarDolar.innerHTML = `
       <button id="pasarValor">Cambiar valor a dolar</button>
-    `
-    let btnCD = document.getElementById('botonCambioADolar')
-    btnCD.appendChild(botonCambiarDolar)
-  
-    let cambio = document.getElementById('pasarValor')
-    cambio.addEventListener('click', cambioDeMoneda)
-  }
-  cambioValorADolar()
+      `
+      let btnCD = document.getElementById('botonCambioADolar')
+      btnCD.appendChild(botonCambiarDolar)
+      
+      let cambio = document.getElementById('pasarValor')
+      cambio.addEventListener('click', cambioDeMoneda)
+    }
+    cambioValorADolar()
 function cambioDeMoneda(){
-    
-    
+        
 
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': '1377426164msh6b8e458c18e620cp1df08ajsn426b349971c5',
-            'X-RapidAPI-Host': 'dolarapi.p.rapidapi.com'
-        }
-    };
-    
-    fetch('https://dolarapi.p.rapidapi.com/blue', options)
+    fetch(`https://v6.exchangerate-api.com/v6/508010b8a9f48bb21104f9ac/pair/ARS/USD `)
         .then(response => response.json())
         .then(response => console.log(response))
         .catch(err => console.error(err));
