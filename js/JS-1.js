@@ -185,12 +185,17 @@ const cambioValorADolar = () => {
       cambio.addEventListener('click', cambioDeMoneda)
     }
     cambioValorADolar()
+
+
+// let variableGlobalFetch = data
+
+
 function cambioDeMoneda(){
-        
+
 
     fetch(`https://v6.exchangerate-api.com/v6/508010b8a9f48bb21104f9ac/pair/ARS/USD `)
         .then(response => response.json())
-        .then(response => console.log(response))
+        .then(data =>  console.log(data))
         .catch(err => console.error(err));
 
 }
