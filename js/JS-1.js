@@ -134,7 +134,7 @@ const calcularTotal = () => {
     contenedorTotal.innerHTML = `Total: $ ${total}`;
     
     cajaTotal()
-    cambioValorADolar()
+    
 };
 
 
@@ -184,8 +184,10 @@ const cambioValorADolar = () => {
     let cambio = document.getElementById('pasarValor')
     cambio.addEventListener('click', cambioDeMoneda)
   }
-
+  cambioValorADolar()
 function cambioDeMoneda(){
+    
+    
 
     const myHeaders = new Headers();
     myHeaders.append("apikey", "4d5Oi2ahBjXZnJF7R6gSVSrayAGWel82");
@@ -196,7 +198,7 @@ function cambioDeMoneda(){
       headers: myHeaders
     };
   
-    fetch("https://api.apilayer.com/exchangerates_data/convert?to={ARS}&from={USD}&amount={12/04/2023}")
+    fetch("https://api.apilayer.com/exchangerates_data/convert?to={USD}&from={EUR}&amount=${precioTotal}", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
