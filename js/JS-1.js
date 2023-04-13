@@ -189,23 +189,20 @@ function cambioDeMoneda(){
     
     
 
-    const myHeaders = new Headers();
-    myHeaders.append("apikey", "4d5Oi2ahBjXZnJF7R6gSVSrayAGWel82");
-    
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-      headers: myHeaders
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '1377426164msh6b8e458c18e620cp1df08ajsn426b349971c5',
+            'X-RapidAPI-Host': 'dolarapi.p.rapidapi.com'
+        }
     };
-  
-    fetch("https://api.apilayer.com/exchangerates_data/convert?to={USD}&from={EUR}&amount=${precioTotal}", requestOptions)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+    
+    fetch('https://dolarapi.p.rapidapi.com/blue', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
 
-}  
-
-
+}
 
 
 
