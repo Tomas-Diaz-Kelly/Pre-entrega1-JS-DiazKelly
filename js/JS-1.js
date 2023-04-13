@@ -187,19 +187,27 @@ const cambioValorADolar = () => {
     cambioValorADolar()
 
 
-// let variableGlobalFetch = data
 
 
 function cambioDeMoneda(){
 
-
     fetch(`https://v6.exchangerate-api.com/v6/508010b8a9f48bb21104f9ac/pair/ARS/USD `)
         .then(response => response.json())
-        .then(data =>  console.log(data))
+        .then(data =>  {
+            variableGlobal(data)
+        })
         .catch(err => console.error(err));
 
 }
 
+function variableGlobal(data){
+        let muestra = document.createElement('div')
+        muestra.innerHTML = `
+            <h3>${precioTotal}</h3>
+        `
+        let ht = document.getElementById('valorDolar')
+        ht.appendChild(muestra)
+}
 
 
 iniciarPrograma()
