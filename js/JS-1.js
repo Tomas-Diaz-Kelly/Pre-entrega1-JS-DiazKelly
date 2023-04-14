@@ -6,7 +6,7 @@ form.addEventListener('submit', (e) => {
     let nombre = e.target[0].value
     let apellido = e.target[1].value
     let modal = document.createElement('div')
-    modal.innerHTML = `Bienvenido: ${nombre} ${apellido}`
+    modal.innerHTML = `<h3 class="text-center position-fixed top-0 w-100 p-3" style="background-color: #fff">Bienvenido: ${nombre} ${apellido}</h3>`
     document.body.appendChild(modal)
     setTimeout(() => {
         document.body.removeChild(modal)
@@ -156,7 +156,7 @@ function eliminarDelCarrito(e){
       })
 }
 
-const cajaTotal = () => {
+const cajaTotal = (dolar) => {
     let cajaPrecioTotal = document.getElementById("boxCajaTotal");
     let boxTotal = document.createElement("div");
     cajaPrecioTotal.innerHTML = "";
@@ -166,7 +166,15 @@ const cajaTotal = () => {
       0
     );
   
-    boxTotal.innerHTML = `<h3>El precio total es: ${precioTotal}</h3>`;
+        if(dolar){
+    boxTotal.innerHTML = `<h3 class="text-center text-muted">El precio total en dolar es: ${precioTotal * dolar}</h3>`;
+
+        }else{
+
+            boxTotal.innerHTML = `<h3 class="text-center text-muted">El precio total es: ${precioTotal}</h3>`;
+        }
+
+
   
     cajaPrecioTotal.appendChild(boxTotal);
 };
@@ -176,38 +184,74 @@ const cajaTotal = () => {
 const cambioValorADolar = () => {
     let botonCambiarDolar = document.createElement('div')
     botonCambiarDolar.innerHTML = `
-      <button id="pasarValor">Cambiar valor a dolar</button>
+      <button id="pasarValor" class="btn btn-primary">Cambiar valor total a dolar</button>
       `
       let btnCD = document.getElementById('botonCambioADolar')
       btnCD.appendChild(botonCambiarDolar)
       
       let cambio = document.getElementById('pasarValor')
-      cambio.addEventListener('click', cambioDeMoneda)
+      cambio.addEventListener('click', getCotizacionDolar)
     }
     cambioValorADolar()
 
 
+let cotizacionDolar
 
-
-function cambioDeMoneda(){
+function getCotizacionDolar(){
 
     fetch(`https://v6.exchangerate-api.com/v6/508010b8a9f48bb21104f9ac/pair/ARS/USD `)
         .then(response => response.json())
         .then(data =>  {
-            variableGlobal(data)
+            cotizacionDolar=data.conversion_rate
+            cajaTotal(cotizacionDolar)
+            
+            console.log(cotizacionDolar)
         })
         .catch(err => console.error(err));
 
 }
 
-function variableGlobal(data){
-        let muestra = document.createElement('div')
-        muestra.innerHTML = `
-            <h3>${precioTotal}</h3>
-        `
-        let ht = document.getElementById('valorDolar')
-        ht.appendChild(muestra)
+
+
+
+function finalizarCompra(){
+    let botonFC = document.createElement('div')
+    botonFC.innerHTML=`
+        <button id="btnfc" class="btn btn-success">Finalizar compra</button>
+    `
+
+    let bt = document.getElementById('botonFinalizar')
+    bt.appendChild(botonFC)
+
+    let btEscucha = document.getElementById('btnfc')
+    btEscucha.addEventListener('click',alert)
+
+
 }
+finalizarCompra()
+
+function alert(){
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Su compra fue realizada con exito! ',
+        showConfirmButton: false,
+        timer: 1500
+      })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 iniciarPrograma()
